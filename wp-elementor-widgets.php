@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WP Elementor Widgets
  * Plugin URI: https://example.com
- * Description: A collection of custom Elementor widgets including a Swiper.js-powered slider.
+ * Description: A collection of custom Elementor widgets.
  * Version: 1.0
  * Author: WP Plugin Architect
  * Author URI: https://chatgpt.com/g/g-6cqBCrKTn-wp-plugin-architect

@@ -13,21 +13,28 @@
 
 .slide-container {
 	display: flex;
-	align-items: center;
+	align-items: stretch; /* Ensures both content and image take full height */
 	width: 100%;
-	max-width: 1200px;
-	margin: auto;
-	padding: 50px;
 }
 
 .slide-content {
 	flex: 1;
 	padding: 20px;
+	border-radius: 5px;
+	transition: background-color 0.3s ease-in-out;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100%; /* Makes it take full height */
 }
 
 .slide-image {
 	flex: 1;
 	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%; /* Ensures image container takes full height */
 }
 
 .slide-image img {
@@ -35,6 +42,8 @@
 	max-width: 500px;
 	border-radius: 5px;
 	display: block;
+	object-fit: cover; /* Ensures image covers full container while maintaining aspect ratio */
+	height: 100%;
 }
 
 /* Image Left */
@@ -55,4 +64,5 @@
 	color: #fff;
 	text-decoration: none;
 	border-radius: 5px;
+	align-self: flex-start;
 }

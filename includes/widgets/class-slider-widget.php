@@ -78,6 +78,12 @@ class WP_Elementor_Slider_Widget extends \Elementor\Widget_Base {
 						],
 						'default' => 'right',
 					],
+					[
+						'name'    => 'info_bg_color',
+						'label'   => __( 'Information Background Color', 'wp-elementor-widgets' ),
+						'type'    => \Elementor\Controls_Manager::COLOR,
+						'default' => '#f4f4f4',
+					],
 				],
 			]
 		);
@@ -99,10 +105,11 @@ class WP_Elementor_Slider_Widget extends \Elementor\Widget_Base {
 					<?php 
 						$image_url = ! empty( $slide['image']['url'] ) ? esc_url( $slide['image']['url'] ) : '';
 						$image_position = esc_attr( $slide['image_position'] ); 
+						$info_bg_color = esc_attr( $slide['info_bg_color'] );
 					?>
 					<div class="swiper-slide">
 						<div class="slide-container <?php echo $image_position === 'left' ? 'image-left' : 'image-right'; ?>">
-							<div class="slide-content">
+							<div class="slide-content" style="background-color: <?php echo $info_bg_color; ?>;">
 								<h2><?php echo esc_html( $slide['title'] ); ?></h2>
 								<p><?php echo esc_html( $slide['description'] ); ?></p>
 								<?php if ( ! empty( $slide['button_text'] ) && ! empty( $slide['button_link']['url'] ) ) : ?>
