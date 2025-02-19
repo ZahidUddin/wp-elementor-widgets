@@ -1,68 +1,61 @@
 .wp-elementor-slider {
-	width: 100%;
-	position: relative;
-	overflow: hidden;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
 }
 
 .swiper-slide {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .slide-container {
-	display: flex;
-	align-items: stretch; /* Ensures both content and image take full height */
-	width: 100%;
+  display: flex;
+  align-items: stretch; /* Ensures both content and image take full height */
+  width: 100%;
 }
 
 .slide-content {
-	flex: 1;
-	padding: 20px;
-	border-radius: 5px;
-	transition: background-color 0.3s ease-in-out;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	height: 100%; /* Makes it take full height */
+  flex: 1;
+  padding: 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: auto;
 }
 
 .slide-image {
-	flex: 1;
-	text-align: center;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 100%; /* Ensures image container takes full height */
+  flex: 1;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%; /* Ensures image container takes full height */
 }
 
 .slide-image img {
-	width: 100%;
-	max-width: 500px;
-	border-radius: 5px;
-	display: block;
-	object-fit: cover; /* Ensures image covers full container while maintaining aspect ratio */
-	height: 100%;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 5px;
+  display: block;
+  object-fit: cover; /* Ensures image covers full container while maintaining aspect ratio */
+  height: 100%;
 }
 
 /* Image Left */
 .image-left {
-	flex-direction: row-reverse;
+  flex-direction: row-reverse;
 }
 
 /* Image Right */
 .image-right {
-	flex-direction: row;
+  flex-direction: row;
 }
 
 .slider-button {
-	display: inline-block;
-	margin-top: 10px;
-	padding: 10px 20px;
-	background: #ff4081;
-	color: #fff;
-	text-decoration: none;
-	border-radius: 5px;
-	align-self: flex-start;
+  align-self: flex-start;
 }

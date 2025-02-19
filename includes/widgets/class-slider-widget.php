@@ -22,6 +22,7 @@ class WP_Elementor_Slider_Widget extends \Elementor\Widget_Base {
 	}
 
 	protected function _register_controls() {
+		// SLIDE CONTENT CONTROLS
 		$this->start_controls_section(
 			'slider_section',
 			[
@@ -80,10 +81,140 @@ class WP_Elementor_Slider_Widget extends \Elementor\Widget_Base {
 					],
 					[
 						'name'    => 'info_bg_color',
-						'label'   => __( 'Information Background Color', 'wp-elementor-widgets' ),
+						'label'   => __( 'Info BG Color', 'wp-elementor-widgets' ),
 						'type'    => \Elementor\Controls_Manager::COLOR,
 						'default' => '#f4f4f4',
 					],
+				],
+			]
+		);
+
+		$this->end_controls_section();
+
+		// TITLE STYLE
+		$this->start_controls_section(
+			'title_style_section',
+			[
+				'label' => __( 'Title Style', 'wp-elementor-widgets' ),
+				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_control(
+			'title_color',
+			[
+				'label'     => __( 'Color', 'wp-elementor-widgets' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .slide-content h2' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name'     => 'title_typography',
+				'label'    => __( 'Typography', 'wp-elementor-widgets' ),
+				'selector' => '{{WRAPPER}} .slide-content h2',
+			]
+		);
+
+		$this->end_controls_section();
+
+		// DESCRIPTION STYLE
+		$this->start_controls_section(
+			'description_style_section',
+			[
+				'label' => __( 'Description Style', 'wp-elementor-widgets' ),
+				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_control(
+			'description_color',
+			[
+				'label'     => __( 'Color', 'wp-elementor-widgets' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .slide-content p' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name'     => 'description_typography',
+				'label'    => __( 'Typography', 'wp-elementor-widgets' ),
+				'selector' => '{{WRAPPER}} .slide-content p',
+			]
+		);
+
+		$this->end_controls_section();
+
+		// BUTTON STYLE
+		$this->start_controls_section(
+			'button_style_section',
+			[
+				'label' => __( 'Button Style', 'wp-elementor-widgets' ),
+				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_control(
+			'button_text_color',
+			[
+				'label'     => __( 'Text Color', 'wp-elementor-widgets' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .slider-button' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'button_bg_color',
+			[
+				'label'     => __( 'Background Color', 'wp-elementor-widgets' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .slider-button' => 'background-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name'     => 'button_typography',
+				'label'    => __( 'Typography', 'wp-elementor-widgets' ),
+				'selector' => '{{WRAPPER}} .slider-button',
+			]
+		);
+
+		// BUTTON PADDING CONTROL
+		$this->add_control(
+			'button_padding',
+			[
+				'label'      => __( 'Padding', 'wp-elementor-widgets' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} .slider-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// BUTTON BORDER RADIUS CONTROL
+		$this->add_control(
+			'button_border_radius',
+			[
+				'label'      => __( 'Border Radius', 'wp-elementor-widgets' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .slider-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -127,7 +258,6 @@ class WP_Elementor_Slider_Widget extends \Elementor\Widget_Base {
 					</div>
 				<?php endforeach; ?>
 			</div>
-			<!-- Swiper Navigation -->
 			<div class="swiper-button-next"></div>
 			<div class="swiper-button-prev"></div>
 			<div class="swiper-pagination"></div>
