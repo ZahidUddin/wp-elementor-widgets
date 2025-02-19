@@ -1,0 +1,29 @@
+.wp-elementor-slider {
+	width: 100%;
+	position: relative;
+}
+
+.swiper-slide {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	text-align: center;
+}
+
+.swiper-slide img {
+	width: 100%;
+	height: auto;
+	border-radius: 5px;
+}
+
+.slider-content {
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	background: rgba(0, 0, 0, 0.5);
+	color: white;
+	padding: 15px;
+	border-radius: 5px;
+}

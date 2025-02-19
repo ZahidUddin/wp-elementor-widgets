@@ -1,0 +1,58 @@
+.wp-elementor-slider {
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+}
+
+.swiper-slide {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+.slide-container {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	max-width: 1200px;
+	margin: auto;
+	padding: 50px;
+}
+
+.slide-content {
+	flex: 1;
+	padding: 20px;
+}
+
+.slide-image {
+	flex: 1;
+	text-align: center;
+}
+
+.slide-image img {
+	width: 100%;
+	max-width: 500px;
+	border-radius: 5px;
+	display: block;
+}
+
+/* Image Left */
+.image-left {
+	flex-direction: row-reverse;
+}
+
+/* Image Right */
+.image-right {
+	flex-direction: row;
+}
+
+.slider-button {
+	display: inline-block;
+	margin-top: 10px;
+	padding: 10px 20px;
+	background: #ff4081;
+	color: #fff;
+	text-decoration: none;
+	border-radius: 5px;
+}

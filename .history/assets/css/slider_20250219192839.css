@@ -1,0 +1,26 @@
+.wp-elementor-slider {
+	width: 100%;
+	overflow: hidden;
+	position: relative;
+}
+
+.slider-container {
+	display: flex;
+	transition: transform 0.5s ease-in-out;
+}
+
+.slider-item {
+	display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content: space-between;
+	padding: 50px;
+}
+
+.slider-content {
+	max-width: 50%;
+}
+
+.slider-image img {
+	max-width: 100%;
+}
