@@ -17,7 +17,9 @@ class WP_Elementor_Widget_Loader {
 		// Register each widget dynamically
 		$widgets = [
 			'WP_Elementor_Slider_Widget',
-		];
+			'WP_Elementor_Post_Type_Widget',
+			'WP_Elementor_Strategic_Section_Widget',
+		];				
 
 		foreach ( $widgets as $widget ) {
 			if ( class_exists( $widget ) ) {

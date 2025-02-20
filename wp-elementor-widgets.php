@@ -32,3 +32,34 @@ function wp_elementor_widgets_enqueue_assets() {
 	wp_enqueue_script( 'wp-elementor-slider-script', WP_ELEMENTOR_WIDGETS_URL . 'assets/js/slider.js', array( 'swiper-js' ), false, true );
 }
 add_action( 'wp_enqueue_scripts', 'wp_elementor_widgets_enqueue_assets' );
+
+
+add_action( 'wp_ajax_load_more_posts', 'load_more_posts_ajax' );
+add_action( 'wp_ajax_nopriv_load_more_posts', 'load_more_posts_ajax' );
+
+function load_more_posts_ajax() {
+	$post_type = sanitize_text_field( $_POST['post_type'] );
+	$posts_per_page = intval( $_POST['posts_per_page'] );
+	$page = intval( $_POST['page'] );
+
+	$args = [
+		'post_type'      => $post_type,
+		'posts_per_page' => $posts_per_page,
+		'paged'          => $page,
+	];
+
+	$query = new WP_Query( $args );
+
+	if ( $query->have_posts() ) {
+		while ( $query->have_posts() ) {
+			$query->the_post();
+			echo '<div class="post-item">';
+			the_title( '<h2>', '</h2>' );
+			the_excerpt();
+			echo '</div>';
+		}
+		wp_reset_postdata();
+	}
+
+	wp_die();
+}
