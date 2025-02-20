@@ -43,7 +43,7 @@ class WP_Elementor_Post_Type_Widget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'loop_template',
 			[
-				'label'   => __( 'Select Elementor Loop Item', 'wp-elementor-widgets' ),
+				'label'   => __( 'Select Post Template', 'wp-elementor-widgets' ),
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'options' => $this->get_elementor_templates(),
 				'default' => '',
@@ -79,36 +79,44 @@ class WP_Elementor_Post_Type_Widget extends \Elementor\Widget_Base {
 
 	protected function render() {
 		$settings = $this->get_settings_for_display();
-
+	
 		$args = [
 			'post_type'      => $settings['post_type'],
 			'posts_per_page' => $settings['posts_per_page'],
-			'paged'          => 1,
 		];
-
+	
 		$query = new WP_Query( $args );
-
-		echo '<div class="post-grid" data-post-type="' . esc_attr( $settings['post_type'] ) . '" 
-			data-posts-per-page="' . esc_attr( $settings['posts_per_page'] ) . '" 
-			data-columns="' . esc_attr( $settings['columns'] ) . '">';
-
+	
+		// Search Input Field
+		echo '<input type="text" class="post-search-input" placeholder="' . __( 'Search posts...', 'wp-elementor-widgets' ) . '" 
+		data-post-type="' . esc_attr( $settings['post_type'] ) . '" 
+		data-posts-per-page="' . esc_attr( $settings['posts_per_page'] ) . '" 
+		data-loop-template="' . esc_attr( $settings['loop_template'] ) . '">';
+	
+		// Posts Container
+		echo '<div class="post-grid" id="post-grid" style="display:grid; grid-template-columns: repeat(' . esc_attr( $settings['columns'] ) . ', 1fr); gap: 20px;">';
+	
 		if ( $query->have_posts() ) {
 			while ( $query->have_posts() ) {
 				$query->the_post();
-				// Use Elementor Loop Template
-				echo '<div class="post-item">';
-				do_action( 'elementor/theme/section_render', $settings['loop_template'] );
-				echo '</div>';
+	
+				// Check if a loop template is selected
+				if ( ! empty( $settings['loop_template'] ) ) {
+					echo '<div class="post-item">';
+					echo \Elementor\Plugin::$instance->frontend->get_builder_content( $settings['loop_template'] );
+					echo '</div>';
+				} else {
+					// Fallback: Basic Post Structure
+					echo 'Select Template First';
+				}
 			}
 			wp_reset_postdata();
 		} else {
 			echo '<p>' . __( 'No posts found.', 'wp-elementor-widgets' ) . '</p>';
 		}
-
-		echo '</div>';
-
-		echo '<button class="load-more-posts" data-page="1">' . __( 'Load More', 'wp-elementor-widgets' ) . '</button>';
-	}
+	
+		echo '</div>'; // End post-grid div
+	}	
 
 	private function get_post_types() {
 		$post_types = get_post_types( [ 'public' => true ], 'objects' );
@@ -123,7 +131,15 @@ class WP_Elementor_Post_Type_Widget extends \Elementor\Widget_Base {
 		$args = [
 			'post_type'      => 'elementor_library',
 			'posts_per_page' => -1,
+			'meta_query'     => [
+				[
+					'key'     => '_elementor_template_type',
+					'value'   => 'loop-item',
+					'compare' => '='
+				]
+			]
 		];
+
 		$templates = get_posts( $args );
 
 		$options = [ '' => __( 'Select Template', 'wp-elementor-widgets' ) ];
