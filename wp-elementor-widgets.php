@@ -54,16 +54,16 @@ function wp_elementor_search_posts_ajax() {
 	$search_query   = isset( $_POST['search_query'] ) ? sanitize_text_field( $_POST['search_query'] ) : '';
 	$template_id    = isset( $_POST['loop_template'] ) ? intval( $_POST['loop_template'] ) : 0;
 
-	// Stop if search query is empty
-	if ( empty( $search_query ) ) {
-		wp_die();
-	}
-
+	// Set up the query arguments
 	$args = [
 		'post_type'      => $post_type,
 		'posts_per_page' => $posts_per_page,
-		's'              => $search_query, // Search by title
 	];
+
+	// Apply search query only if it's not empty
+	if ( ! empty( $search_query ) ) {
+		$args['s'] = $search_query; // Search by title
+	}
 
 	$query = new WP_Query( $args );
 
@@ -78,7 +78,9 @@ function wp_elementor_search_posts_ajax() {
 				echo '</div>';
 			} else {
 				// Fallback if no template is selected
-				echo 'Select Template First';
+				echo '<div class="post-item">';
+				echo '<h3>' . get_the_title() . '</h3>';
+				echo '</div>';
 			}
 		}
 		wp_reset_postdata();

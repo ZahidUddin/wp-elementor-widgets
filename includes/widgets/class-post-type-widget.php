@@ -75,6 +75,49 @@ class WP_Elementor_Post_Type_Widget extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
+
+		// === Label Styling Section ===
+		$this->start_controls_section(
+			'label_style_section',
+			[
+				'label' => __( 'Label Style', 'wp-elementor-widgets' ),
+				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_control(
+			'label_color',
+			[
+				'label'     => __( 'Text Color', 'wp-elementor-widgets' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .search-label' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name'     => 'label_typography',
+				'label'    => __( 'Typography', 'wp-elementor-widgets' ),
+				'selector' => '{{WRAPPER}} .search-label',
+			]
+		);
+
+		$this->add_responsive_control(
+			'label_margin',
+			[
+				'label'      => __( 'Margin', 'wp-elementor-widgets' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .search-label' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->end_controls_section();
 	}
 
 	protected function render() {
@@ -88,10 +131,15 @@ class WP_Elementor_Post_Type_Widget extends \Elementor\Widget_Base {
 		$query = new WP_Query( $args );
 	
 		// Search Input Field
-		echo '<input type="text" class="post-search-input" placeholder="' . __( 'Search posts...', 'wp-elementor-widgets' ) . '" 
-		data-post-type="' . esc_attr( $settings['post_type'] ) . '" 
-		data-posts-per-page="' . esc_attr( $settings['posts_per_page'] ) . '" 
-		data-loop-template="' . esc_attr( $settings['loop_template'] ) . '">';
+		echo '<div class="search-container">
+			<label class="search-label">Partner Type</label>
+			<div class="search-box">
+				<input type="text" class="post-search-input input-elevated" placeholder="' . __( 'Search posts...', 'wp-elementor-widgets' ) . '" 
+				data-post-type="' . esc_attr( $settings['post_type'] ) . '" 
+				data-posts-per-page="' . esc_attr( $settings['posts_per_page'] ) . '" 
+				data-loop-template="' . esc_attr( $settings['loop_template'] ) . '">
+			</div>
+		</div>';
 	
 		// Posts Container
 		echo '<div class="post-grid" id="post-grid" style="display:grid; grid-template-columns: repeat(' . esc_attr( $settings['columns'] ) . ', 1fr); gap: 20px;">';
